@@ -133,6 +133,8 @@ class ChatRequest(BaseModel):
 
 
 @app.get("/")
+@app.get("/api")
+@app.get("/api/index")
 def home():
     return {
         "status": "online",
@@ -144,6 +146,8 @@ def home():
 
 
 @app.get("/v1/models")
+@app.get("/api/v1/models")
+@app.get("/api/models")
 def list_models():
     now = int(time.time())
     return {
@@ -182,6 +186,8 @@ def list_models():
 
 
 @app.post("/v1/chat/completions")
+@app.post("/api/v1/chat/completions")
+@app.post("/api/chat/completions")
 async def chat_completions(req: ChatRequest):
     if not req.messages:
         raise HTTPException(status_code=400, detail="Messages list cannot be empty")
